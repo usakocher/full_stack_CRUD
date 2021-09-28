@@ -19,6 +19,13 @@ def create_app(config):
     api.add_namespace(recipe_ns)
     api.add_namespace(auth_ns)
 
+    @app.route('/')
+    def index():
+        return app.send_static_file('index.html')
+
+    @app.errorhandler(404)
+    def not_found(err):
+        return app.send_static_file('index.html')
 
 
     @app.shell_context_processor
