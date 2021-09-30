@@ -1,24 +1,33 @@
-import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from './components/Navbar';
+import Home from './components/Home';
+import CreateRecipe from './components/CreateRecipe';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-const App = () => {
-    const [message, setMessage] = useState('');
-
-    useEffect(() => {
-        fetch('/recipe/hello')
-        .then(response => response.json())
-        .then(data =>{console.log(data)
-            setMessage(data.message)
-        })
-        .catch(err => console.log(err))
-
-
-    }, [])
-
+const App = () => {    
     return (
-        <div className="app">
-            {message}
+        <Router>
+        <div className="">
+            <NavBar/>
+            <Switch>
+                <Route path="/create_recipe">
+                    <CreateRecipe/>
+                </Route>
+                <Route path="/login">
+                    <Login/>
+                </Route>
+                <Route path="/signup">
+                    <SignUp/>                
+                </Route>    
+                <Route path="/">
+                    <Home/>
+                </Route>
+            </Switch>
         </div>
+        </Router>
     )
 }
 
